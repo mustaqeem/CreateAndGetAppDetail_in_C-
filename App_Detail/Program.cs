@@ -16,7 +16,7 @@ namespace App_Detail
             RestAPI r = new RestAPI("XXXXXXXXXXXXXXXXXXXXXXXXXX", "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
             try
             {
-                Application app = CreateAndGetDetailApplication(r, new dict { { "app_name", "App1" }, { "answer_url", "http://answer_url" } });
+                Application app = CreateAndGetDetailApplication(r, new dict { { "app_name", "lkjg" }, { "answer_url", "http://answer_url" } });
                 if (app != null)
                 {
                     Console.WriteLine("Answer Method: " + app.answer_method);

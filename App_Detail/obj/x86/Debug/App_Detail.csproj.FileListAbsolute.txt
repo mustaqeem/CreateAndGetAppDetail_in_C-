@@ -1,0 +1,7 @@
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\bin\Debug\App_Detail.exe
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\bin\Debug\App_Detail.pdb
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\bin\Debug\Plivo.dll
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\bin\Debug\RestSharp.dll
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\obj\x86\Debug\App_Detail.exe
+c:\users\administrator\documents\visual studio 2010\Projects\App_Detail\App_Detail\obj\x86\Debug\App_Detail.pdb

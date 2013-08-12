@@ -6,6 +6,7 @@ using Plivo.API;
 using RestSharp;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 using System.Reflection;
+using System.Threading;
 
 namespace App_Detail
 {
@@ -13,22 +14,20 @@ namespace App_Detail
     {
         static void Main(string[] args)
         {
-            RestAPI r = new RestAPI("XXXXXXXXXXXXXXXXXXXXXXXXXX", "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+            RestAPI r = new RestAPI("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");      
             try
             {
-                Application app = CreateAndGetDetailApplication(r, new dict { { "app_name", "lkjg" }, { "answer_url", "http://answer_url" } });
+                Application app = CreateAndGetDetailApplication(r, new dict { { "app_name", "appname" }, { "answer_url", "http://answer_url" } });
                 if (app != null)
                 {
-                    Console.WriteLine("Answer Method: " + app.answer_method);
-                    Console.WriteLine("Answer Url: " + app.answer_url);
                     Console.WriteLine("App Id: " + app.app_id);
-                    Console.WriteLine("App Name: " + app.app_name);
+                    Console.WriteLine("SIP URI: " + app.sip_uri);
 
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Exception: "+ex.Message);
             }            
             Console.ReadKey();
         }
@@ -52,18 +51,27 @@ namespace App_Detail
         static Application CreateAndGetDetailApplication(RestAPI r, dict parameters)
         {
             IRestResponse<GenericResponse> resp = r.create_application(parameters);
+            bool flag = false;
             if (resp.Data != null)
             {
                 PropertyInfo[] proplist = resp.Data.GetType().GetProperties();
-                if (parameters["app_name"] == null)
-                    return GetApplicationDetailByName(r, parameters["app_name"]);
-                else throw new PlivoException("An application with same name already exist");
+                foreach (PropertyInfo property in proplist)
+                {
+                    string er = resp.Data.error;
+                    if (property.Name == "error" && er!= null)
+                    {
+                        flag = true;
+                    }
+                }
+                Thread.Sleep(500);
+                if(flag)
+                    throw new PlivoException("An application with same name already exist");    
+                return GetApplicationDetailByName(r, parameters["app_name"]);
             }
             else
             {
-                Console.WriteLine("------------->"+resp.ErrorMessage);
+                throw new PlivoException(resp.ErrorMessage);
             }
-            return null;
         }
     }
 }
